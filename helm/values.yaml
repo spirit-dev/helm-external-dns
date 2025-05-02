@@ -19,10 +19,10 @@ external-dns-ovh:
   imagePullSecrets: [] # @schema item: object
 
   # -- (string) Override the name of the chart.
-  nameOverride: # @schema type:[string, null]; default: null
+  nameOverride:
 
   # -- (string) Override the full name of the chart.
-  fullnameOverride: # @schema type:[string, null]; default: null
+  fullnameOverride:
 
   # -- Labels to add to all chart resources.
   commonLabels: {}
@@ -35,9 +35,9 @@ external-dns-ovh:
     # -- Annotations to add to the service account. Templates are allowed in both the key and the value. Example: `example.com/annotation/{{ .Values.nameOverride }}: {{ .Values.nameOverride }}`
     annotations: {}
     # -- (string) If this is set and `serviceAccount.create` is `true` this will be used for the created `ServiceAccount` name, if set and `serviceAccount.create` is `false` then this will define an existing `ServiceAccount` to use.
-    name: # @schema type:[string, null]; default: null
+    name:
     # -- Set this to `false` to [opt out of API credential automounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting) for the `ServiceAccount`.
-    automountServiceAccountToken: true
+    automountServiceAccountToken:
 
   service:
     # -- Service annotations.
@@ -77,7 +77,7 @@ external-dns-ovh:
   podAnnotations: {}
 
   # -- (bool) Set this to `false` to [opt out of API credential automounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting) for the `Pod`.
-  automountServiceAccountToken: true
+  automountServiceAccountToken:
 
   # -- If `true`, the `Pod` will have [process namespace sharing](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) enabled.
   shareProcessNamespace: false
@@ -91,16 +91,16 @@ external-dns-ovh:
       type: RuntimeDefault
 
   # -- (string) Priority class name for the `Pod`.
-  priorityClassName: # @schema type:[string, null]; default: null
+  priorityClassName:
 
   # -- (int) Termination grace period for the `Pod` in seconds.
-  terminationGracePeriodSeconds: # @schema type:[integer, null]
+  terminationGracePeriodSeconds:
 
   # -- (string) [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy) for the pod, if not set the default will be used.
-  dnsPolicy: # @schema type:[string, null]; default: null
+  dnsPolicy:
 
   # -- (object) [DNS config](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config) for the pod, if not set the default will be used.
-  dnsConfig: # @schema type:[object, null]; default: null
+  dnsConfig:
 
   # -- [Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to add to the `Pod` definition.
   initContainers: []
@@ -173,17 +173,17 @@ external-dns-ovh:
     # -- Annotations to add to the `ServiceMonitor`.
     annotations: {}
     # -- (string) If set create the `ServiceMonitor` in an alternate namespace.
-    namespace: # @schema type:[string, null]; default: null
+    namespace:
     # -- (string) If set override the _Prometheus_ default interval.
-    interval: # @schema type:[string, null]; default: null
+    interval:
     # -- (string) If set override the _Prometheus_ default scrape timeout.
-    scrapeTimeout: # @schema type:[string, null]; default: null
+    scrapeTimeout:
     # -- (string) If set overrides the _Prometheus_ default scheme.
-    scheme: # @schema type:[string, null]; default: null
+    scheme:
     # -- Configure the `ServiceMonitor` [TLS config](https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig).
     tlsConfig: {}
     # -- (string) Provide a bearer token file for the `ServiceMonitor`.
-    bearerTokenFile: # @schema type:[string, null]; default: null
+    bearerTokenFile:
     # -- [Relabel configs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config) to apply to samples before ingestion.
     relabelings: []
     # -- [Metric relabel configs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs) to apply to samples before ingestion.
@@ -233,20 +233,20 @@ external-dns-ovh:
   excludeDomains: []
 
   # -- Filter resources queried for endpoints by label selector
-  labelFilter: # @schema type: [string,null]; default: null
+  labelFilter: # @schema pattern:^[a-zA-Z0-9._-]+=[a-zA-Z0-9._-]+$; type: [string,null];
 
   # -- Record types to manage (default: A, AAAA, CNAME)
   managedRecordTypes: [] # @schema type: [array, null]; item: string; uniqueItems: true;
 
-  provider: # @schema type: [object, string];
+  provider:
     # -- _ExternalDNS_ provider name; for the available providers and how to configure them see [README](https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/README.md#providers).
     name: aws
     webhook:
       image:
         # -- (string) Image repository for the `webhook` container.
-        repository: # @schema type:[string, null]; default: null
+        repository:
         # -- (string) Image tag for the `webhook` container.
-        tag: # @schema type:[string, null]; default: null
+        tag:
         # -- Image pull policy for the `webhook` container.
         pullPolicy: IfNotPresent
       # -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the `webhook` container.
@@ -264,24 +264,24 @@ external-dns-ovh:
       # @default -- See _values.yaml_
       livenessProbe:
         httpGet:
-          path: /healthz # @schema type:[string, null]; default: null
-          port: http-webhook # @schema type:[integer,string]; default: string
-        initialDelaySeconds: 10 # @schema type:[integer, null]; default: null
-        periodSeconds: 10 # @schema type:[integer, null]; default: null
-        timeoutSeconds: 5 # @schema type:[integer, null]; default: null
-        failureThreshold: 2 # @schema type:[integer, null]; default: null
-        successThreshold: 1 # @schema type:[integer, null]; default: null
+          path: /healthz
+          port: http-webhook
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 2
+        successThreshold: 1
       # -- [Readiness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) configuration for the `webhook` container.
       # @default -- See _values.yaml_
       readinessProbe:
         httpGet:
-          path: /healthz # @schema type:[string, null]; default: null
-          port: http-webhook # @schema type:[integer,string]; default: string
-        initialDelaySeconds: 5 # @schema type:[integer, null]; default: null
-        periodSeconds: 10 # @schema type:[integer, null]; default: null
-        timeoutSeconds: 5 # @schema type:[integer, null]; default: null
-        failureThreshold: 6 # @schema type:[integer, null]; default: null
-        successThreshold: 1 # @schema type:[integer, null]; default: null
+          path: /healthz
+          port: http-webhook
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 6
+        successThreshold: 1
       service:
         # -- Webhook exposed HTTP port for the service.
         port: 8080
@@ -297,21 +297,17 @@ external-dns-ovh:
         relabelings: []
 
   # -- Extra arguments to provide to _ExternalDNS_.
-  # An array or map can be used, with maps allowing for value overrides; maps also support slice values to use the same arg multiple times.
-  extraArgs: [] # @schema type: [array, null, object]; item: string; uniqueItems: true;
+  extraArgs: [] # @schema type: [array, null]; item: string; uniqueItems: true;
 
   secretConfiguration:
     # -- If `true`, create a `Secret` to store sensitive provider configuration (**DEPRECATED**).
     enabled: false
     # -- Mount path for the `Secret`, this can be templated.
-    mountPath: # @schema type:[string, null]; default: null
+    mountPath:
     # -- Sub-path for mounting the `Secret`, this can be templated.
-    subPath: # @schema type:[string, null]; default: null
+    subPath:
     # -- `Secret` data.
     data: {}
-
-  # -- (bool) No effect - reserved for use in sub-charting.
-  enabled: # @schema type: [boolean, null]; description: No effect - reserved for use in sub-charting
 
 external-dns-pihole:
   # Default values for external-dns.
@@ -334,10 +330,10 @@ external-dns-pihole:
   imagePullSecrets: [] # @schema item: object
 
   # -- (string) Override the name of the chart.
-  nameOverride: # @schema type:[string, null]; default: null
+  nameOverride:
 
   # -- (string) Override the full name of the chart.
-  fullnameOverride: # @schema type:[string, null]; default: null
+  fullnameOverride:
 
   # -- Labels to add to all chart resources.
   commonLabels: {}
@@ -350,9 +346,9 @@ external-dns-pihole:
     # -- Annotations to add to the service account. Templates are allowed in both the key and the value. Example: `example.com/annotation/{{ .Values.nameOverride }}: {{ .Values.nameOverride }}`
     annotations: {}
     # -- (string) If this is set and `serviceAccount.create` is `true` this will be used for the created `ServiceAccount` name, if set and `serviceAccount.create` is `false` then this will define an existing `ServiceAccount` to use.
-    name: # @schema type:[string, null]; default: null
+    name:
     # -- Set this to `false` to [opt out of API credential automounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting) for the `ServiceAccount`.
-    automountServiceAccountToken: true
+    automountServiceAccountToken:
 
   service:
     # -- Service annotations.
@@ -392,7 +388,7 @@ external-dns-pihole:
   podAnnotations: {}
 
   # -- (bool) Set this to `false` to [opt out of API credential automounting](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting) for the `Pod`.
-  automountServiceAccountToken: true
+  automountServiceAccountToken:
 
   # -- If `true`, the `Pod` will have [process namespace sharing](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) enabled.
   shareProcessNamespace: false
@@ -406,16 +402,16 @@ external-dns-pihole:
       type: RuntimeDefault
 
   # -- (string) Priority class name for the `Pod`.
-  priorityClassName: # @schema type:[string, null]; default: null
+  priorityClassName:
 
   # -- (int) Termination grace period for the `Pod` in seconds.
-  terminationGracePeriodSeconds: # @schema type:[integer, null]
+  terminationGracePeriodSeconds:
 
   # -- (string) [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy) for the pod, if not set the default will be used.
-  dnsPolicy: # @schema type:[string, null]; default: null
+  dnsPolicy:
 
   # -- (object) [DNS config](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config) for the pod, if not set the default will be used.
-  dnsConfig: # @schema type:[object, null]; default: null
+  dnsConfig:
 
   # -- [Init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to add to the `Pod` definition.
   initContainers: []
@@ -488,17 +484,17 @@ external-dns-pihole:
     # -- Annotations to add to the `ServiceMonitor`.
     annotations: {}
     # -- (string) If set create the `ServiceMonitor` in an alternate namespace.
-    namespace: # @schema type:[string, null]; default: null
+    namespace:
     # -- (string) If set override the _Prometheus_ default interval.
-    interval: # @schema type:[string, null]; default: null
+    interval:
     # -- (string) If set override the _Prometheus_ default scrape timeout.
-    scrapeTimeout: # @schema type:[string, null]; default: null
+    scrapeTimeout:
     # -- (string) If set overrides the _Prometheus_ default scheme.
-    scheme: # @schema type:[string, null]; default: null
+    scheme:
     # -- Configure the `ServiceMonitor` [TLS config](https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig).
     tlsConfig: {}
     # -- (string) Provide a bearer token file for the `ServiceMonitor`.
-    bearerTokenFile: # @schema type:[string, null]; default: null
+    bearerTokenFile:
     # -- [Relabel configs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config) to apply to samples before ingestion.
     relabelings: []
     # -- [Metric relabel configs](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs) to apply to samples before ingestion.
@@ -548,20 +544,20 @@ external-dns-pihole:
   excludeDomains: []
 
   # -- Filter resources queried for endpoints by label selector
-  labelFilter: # @schema type: [string,null]; default: null
+  labelFilter: # @schema pattern:^[a-zA-Z0-9._-]+=[a-zA-Z0-9._-]+$; type: [string,null];
 
   # -- Record types to manage (default: A, AAAA, CNAME)
   managedRecordTypes: [] # @schema type: [array, null]; item: string; uniqueItems: true;
 
-  provider: # @schema type: [object, string];
+  provider:
     # -- _ExternalDNS_ provider name; for the available providers and how to configure them see [README](https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/README.md#providers).
     name: aws
     webhook:
       image:
         # -- (string) Image repository for the `webhook` container.
-        repository: # @schema type:[string, null]; default: null
+        repository:
         # -- (string) Image tag for the `webhook` container.
-        tag: # @schema type:[string, null]; default: null
+        tag:
         # -- Image pull policy for the `webhook` container.
         pullPolicy: IfNotPresent
       # -- [Environment variables](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) for the `webhook` container.
@@ -579,24 +575,24 @@ external-dns-pihole:
       # @default -- See _values.yaml_
       livenessProbe:
         httpGet:
-          path: /healthz # @schema type:[string, null]; default: null
-          port: http-webhook # @schema type:[integer,string]; default: string
-        initialDelaySeconds: 10 # @schema type:[integer, null]; default: null
-        periodSeconds: 10 # @schema type:[integer, null]; default: null
-        timeoutSeconds: 5 # @schema type:[integer, null]; default: null
-        failureThreshold: 2 # @schema type:[integer, null]; default: null
-        successThreshold: 1 # @schema type:[integer, null]; default: null
+          path: /healthz
+          port: http-webhook
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 2
+        successThreshold: 1
       # -- [Readiness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) configuration for the `webhook` container.
       # @default -- See _values.yaml_
       readinessProbe:
         httpGet:
-          path: /healthz # @schema type:[string, null]; default: null
-          port: http-webhook # @schema type:[integer,string]; default: string
-        initialDelaySeconds: 5 # @schema type:[integer, null]; default: null
-        periodSeconds: 10 # @schema type:[integer, null]; default: null
-        timeoutSeconds: 5 # @schema type:[integer, null]; default: null
-        failureThreshold: 6 # @schema type:[integer, null]; default: null
-        successThreshold: 1 # @schema type:[integer, null]; default: null
+          path: /healthz
+          port: http-webhook
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 6
+        successThreshold: 1
       service:
         # -- Webhook exposed HTTP port for the service.
         port: 8080
@@ -612,18 +608,14 @@ external-dns-pihole:
         relabelings: []
 
   # -- Extra arguments to provide to _ExternalDNS_.
-  # An array or map can be used, with maps allowing for value overrides; maps also support slice values to use the same arg multiple times.
-  extraArgs: [] # @schema type: [array, null, object]; item: string; uniqueItems: true;
+  extraArgs: [] # @schema type: [array, null]; item: string; uniqueItems: true;
 
   secretConfiguration:
     # -- If `true`, create a `Secret` to store sensitive provider configuration (**DEPRECATED**).
     enabled: false
     # -- Mount path for the `Secret`, this can be templated.
-    mountPath: # @schema type:[string, null]; default: null
+    mountPath:
     # -- Sub-path for mounting the `Secret`, this can be templated.
-    subPath: # @schema type:[string, null]; default: null
+    subPath:
     # -- `Secret` data.
     data: {}
-
-  # -- (bool) No effect - reserved for use in sub-charting.
-  enabled: # @schema type: [boolean, null]; description: No effect - reserved for use in sub-charting
