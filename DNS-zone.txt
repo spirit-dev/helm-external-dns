@@ -35,7 +35,6 @@ cname-octobot-ob-bot-1-dry-internal        IN TXT     "heritage=external-dns,ext
 cname-octobot-ob-bot-1-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/finops/octobot-ob-bot-1"
 cname-octobot-ob-bot-1-prd-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/finops/octobot-ob-bot-1-prd"
 cname-photoprism-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/media/photoprism-photoprism-app"
-cname-photoprism222-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/media/photoprism-photoprism-app"
 cname-prometheus-alerts-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/monitoring/prometheus-kube-prometheus-alertmanager"
 cname-prometheus-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/monitoring/prometheus-kube-prometheus-prometheus"
 cname-prowlarr-internal        IN TXT     "heritage=external-dns,external-dns/owner=turing-pi,external-dns/resource=ingress/transmission/prowlarr-private"
