@@ -14,6 +14,10 @@ dependencies:
     repository: https://kubernetes-sigs.github.io/external-dns/
     version: 1.16.1
     alias: external-dns-pihole
+  - name: external-dns
+    repository: https://kubernetes-sigs.github.io/external-dns/
+    version: 1.16.1
+    alias: external-dns-cloudflare
 
 # A chart can be either an 'application' or a 'library' chart.
 #
