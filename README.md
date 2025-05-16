@@ -21,3 +21,11 @@ The installation should be done in two steps:
 ## Create OVH credentials
 
 https://kubernetes-sigs.github.io/external-dns/v0.14.0/tutorials/ovh/#creating-a-zone-with-ovh-dns
+
+## Extra resources
+
+the following resources are extracted from DNS providers (OVH and Cloudflare). Files do not intent to be a backup but note that some of its config (mail especially) are critical for the wellness of the solution.
+
+- [DNS zone bordat.me Cloudflare](doc/DNS-zone-CF-bordat.me-ori.txt)
+- [DNS zone spirit-dev.net Cloudflare](doc/DNS-zone-CF-spirit-dev.net-ori.txt)
+- [DNS zone spirit-dev.net OVH](doc/DNS-zone-OVH-spirit-dev.net-ori.txt)
