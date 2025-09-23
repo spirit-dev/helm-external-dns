@@ -1,0 +1,39 @@
+# external-dns
+
+{% if repo_type == 'gitlab' -%}
+{% include '.gitlab/badges.md' %}
+{%- endif %}
+
+<!--TOC-->
+
+- [Installation process](#installation-process)
+- [Create OVH credentials](#create-ovh-credentials)
+- [Extra resources](#extra-resources)
+
+<!--TOC-->
+
+## Installation process
+
+The installation is entirely managed by Argocd.
+
+A `Makefile` is present here to ease the first and one-time deployment or in case of an issue.
+The installation should be done in two steps:
+
+```shell
+#> make dry-run ENV=<ENV>
+#> make install ENV=<ENV>
+```
+
+## Create OVH credentials
+
+[OVH Documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.0/tutorials/ovh/#creating-a-zone-with-ovh-dns)
+
+{% if repo_type == 'gitlab' -%}
+## Extra resources
+
+the following resources are extracted from DNS providers (OVH and Cloudflare). Files do not intent to be a backup but note that some of its config (mail especially) are critical for the wellness of the solution.
+
+- [DNS zone bordat.me Cloudflare](doc/DNS-zone-CF-bordat.me-ori.txt)
+- [DNS zone spirit-dev.net Cloudflare](doc/DNS-zone-CF-spirit-dev.net-ori.txt)
+- [DNS zone spirit-dev.net OVH](doc/DNS-zone-OVH-spirit-dev.net-ori.txt)
+{%- endif %}
