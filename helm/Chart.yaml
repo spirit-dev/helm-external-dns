@@ -8,11 +8,11 @@ sources:
 dependencies:
   - name: external-dns
     repository: https://kubernetes-sigs.github.io/external-dns/
-    version: 1.19.0
+    version: 1.20.0
     alias: external-dns-pihole
   - name: external-dns
     repository: https://kubernetes-sigs.github.io/external-dns/
-    version: 1.19.0
+    version: 1.20.0
     alias: external-dns-cloudflare
 
 type: application
